@@ -1,5 +1,6 @@
 package com.example.nandkishorjindal.firebasestorage;
 
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,8 +55,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             uploadFile();
         }
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 0) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                buttonCamera.setEnabled(true);
+            }
+        }
+    }
 
     private void uploadFile() {
+
     }
 
     private void showFileChooser() {
