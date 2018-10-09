@@ -1,7 +1,10 @@
 package com.example.nandkishorjindal.firebasestorage;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +13,10 @@ import android.widget.ImageView;
 
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -73,7 +80,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void takePhoto() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        file = Uri.fromFile(getOutputMediaFile());
+
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, file);
+
+        startActivityForResult(intent,100);
     }
+    private static File getOutputMediaFile () {
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), "CameraDemo");
+
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                return null;
+            }
+        }
+
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        return new File(mediaStorageDir.getPath() + File.separator +
+                "IMG_" + timeStamp + ".jpg");
+    }
+
 
 }
 
