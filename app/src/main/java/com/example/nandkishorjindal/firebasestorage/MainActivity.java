@@ -37,5 +37,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
+        if(v == buttonCamera){
+            //choose camera
+            takePhoto();
+
+
+        }
+        else if(v == buttonGallery)
+        {
+            //choose gallery
+            showFileChooser();
+
+        }
+        else if(v== buttonUpdate){
+            //upload file
+            uploadFile();
+        }
     }
+
+    private void uploadFile() {
+    }
+
+    private void showFileChooser() {
+    }
+
+    private void takePhoto() {
+    }
+
 }
+
